@@ -1,0 +1,879 @@
+/* Import font */
+
+:root {
+    --white: #FDFFFC;
+    --black: #1d1d1d;
+    --accent1: #38405F;
+    --accent2: #2EC4B6;
+    --accent2_hover: #1C7A7B;
+    --accent3: #0056b3;
+    --accent3_hover: #004494;
+}
+
+
+
+body {
+    background-color: var(--white);
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Remove default behavior */
+.base-container{
+    position: relative;
+}
+.base-container a {
+    text-decoration: none;
+}
+
+.base-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.base-container li {
+    padding: 0;
+    margin: 0;
+}
+
+/* Navigation */
+.headnav{
+    position: fixed;
+    width: 90%;
+    height: 7vh;
+    padding: 0 5%;
+    background-color: var(--accent1); /* Ensure --accent1 is defined */
+    top: 0;
+    z-index: 500;
+}
+
+.headnav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.headnav ul li a {
+    color: var(--white); /* Ensure --white is defined */
+    font-size: 1.5rem;
+}
+
+.headnav ul li a:hover,
+.headnav ul li a:focus {
+    color: #8b7be8;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.footernav {
+    position: fixed;
+    bottom: 0;
+    width: 90%;
+    height: 7vh;
+    padding: 0 5%;
+    background-color: var(--accent1); /* Ensure --accent1 is defined */
+    z-index: 500;
+}
+
+.footernav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.footernav ul li a, .nav-link {
+    color: var(--white); /* Ensure --white is defined */
+    font-size: 1.5rem;
+}
+
+.footernav ul li a:hover,
+.footernav ul li a:focus {
+    color: #8b7be8;
+    transform: translateY(-2px);
+}
+
+.base-container #mapid {
+    z-index: 5; /* Adjust as needed to be below the footernav */
+    bottom: 18;/* other styles */
+    margin-top: 2px;
+    box-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7;
+}
+.bubble-container {
+    opacity: 0.8;
+    position: absolute;
+    top: 500px;
+    left: 50px;
+    z-index: 1000;
+}
+.bubble {
+    background-color: rgba(255, 255, 255, 0); /* Adjust background color and opacity */
+}
+
+.bubble-container input[type="text"] {
+    width: 150px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+}
+
+.bubble-container button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2EC4B6;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.bubble-container button:hover {
+    background-color: white;
+    color: #2EC4B6;
+}
+.bubble-container button:active{
+    opacity: 0.6;
+}
+
+.airport-dropdown-container{
+    opacity: 0.8;
+    position: absolute;
+    top: 540px;
+    left: 50px;
+    z-index: 1000;
+}
+.airport-dropdown-container #airport-dropdown{
+    width: 140px;
+    padding-left: 5px;
+    padding-right:5px;
+    padding-top: 3px;
+    padding-bottom: 1px;
+    border-radius: 4px;
+    border: none;
+    margin-right: 5px;
+}
+
+.base-container .welcomeMessageDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 150px;
+}
+
+.base-container .quickSearch {
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7;
+    text-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7, 0 0 40px #81D8F7;
+    backdrop-filter: blur( 10.5px );
+    -webkit-backdrop-filter: blur( 10.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    padding: 1em;
+    margin: 1em;
+    text-align: center;
+    margin-top: 80px;
+    background-color:#6f9ac5;
+}
+
+.base-container .quickSearch h2 {
+    margin-bottom: 5px;
+}
+
+.base-container .quickSearch form {
+    /* width: 100%; */
+    max-width: 420px; /* Adjust based on your preference */
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.base-container .quickSearch form div + div {
+    margin-top: 5px;
+}
+
+.base-container .quickSearch form input[type="text"] {
+    padding: 0.5em;
+    margin: 0.5em;
+    border-radius: 5px;
+    border: 1px solid var(--accent2);
+    text-align: center;
+}
+
+.base-container .quickSearch form .quick-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--accent2);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.base-container .quickSearch form .quick-submit:hover {
+    background-color: var(--accent2_hover);
+}
+
+.base-container .quickSearch form input[type="text"]:last-of-type {
+    margin-bottom: 20px;
+}
+
+.base-container #results{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 80px;
+
+}
+
+.base-container .welcomeDiv {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* flex-wrap: wrap; */
+    overflow: hidden;
+    display: flex;
+}
+
+.welcomeDiv #search-results .fade-me-in{
+    position: relative;
+    margin-top: 55px;
+    max-height: 390px;
+    overflow: auto;
+    z-index: 100;
+    color: white;
+    background-color: #6f9ac5;
+    box-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7, 0 0 40px #81D8F7;
+
+}
+
+.base-container .keanuDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 150px;
+}
+
+#keanuPre {
+    /* color: #456ba0; */
+    /* Neon glow effect */
+    text-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7, 0 0 40px #81D8F7;
+    font-weight: bold;
+}
+
+
+/* Contact form */
+.base-container #contactForm {
+    width: 90%;
+    height: 98%;
+    margin: 15px;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.base-container input.contactinput{
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    width: 97%;
+    height: 25px;
+}
+
+.base-container label.contactlabel {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    width: 90%;
+    height: 15px;
+}
+
+.base-container textarea.contacttextarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 100px;
+}
+
+.base-container button.contactbtn[type="submit"] {
+    width: 100%;
+    background-color: #004494;
+    color: white;
+    padding: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.base-container button.register-btn[type="submit"] {
+    width: 96%;
+    background-color: #004494;
+    color: white;
+    padding: 10px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+
+}
+
+.base-container #login-link,
+.base-container #register-link {
+    color: #004494;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.base-container button.contactbtn[type="submit"]:hover,
+.base-container button.register-btn[type="submit"]:hover {
+    background-color: #456ba0;
+}
+
+/* Style response message */
+.base-container #response-message {
+    margin-top: 10px;
+    color: #333;
+}
+
+.base-container #modal {
+/* Underlay covers entire screen. */
+position: fixed;
+top:0px;
+bottom: 0px;
+left:0px;
+right:0px;
+background-color:rgba(0,0,0,0.5);
+z-index:1000;
+
+/* Flexbox centers the .modal-content vertically and horizontally */
+display:flex;
+flex-direction:column;
+align-items:center;
+
+/* Animate when opening */
+animation-name: fadeIn;
+animation-duration:150ms;
+animation-timing-function: ease;
+}
+
+.base-container #modal > .modal-underlay {
+/* underlay takes up the entire viewport. This is only
+required if you want to click to dismiss the popup */
+position: absolute;
+z-index: -1;
+top:0px;
+bottom:0px;
+left: 0px;
+right: 0px;
+}
+
+.base-container #modal > .modal-content {
+/* Position visible dialog near the top of the window */
+margin-top:2vh;
+
+/* Sizing for visible dialog */
+width:80%;
+max-width:600px;
+max-height: 900px;
+
+/* Display properties for visible dialog*/
+border:solid 1px #999;
+border-radius:8px;
+box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+background-color:white;
+padding:20px;
+
+/* Animate when opening */
+animation-name:zoomIn;
+animation-duration:150ms;
+animation-timing-function: ease;
+}
+
+.base-container #modal.closing {
+/* Animate when closing */
+animation-name: fadeOut;
+animation-duration:150ms;
+animation-timing-function: ease;
+}
+
+.base-container #modal.closing > .modal-content {
+/* Animate when closing */
+animation-name: zoomOut;
+animation-duration:150ms;
+animation-timing-function: ease;
+}
+
+@keyframes fadeIn {
+0% {opacity: 0;}
+100% {opacity: 1;}
+}
+
+@keyframes fadeOut {
+0% {opacity: 1;}
+100% {opacity: 0;}
+}
+
+@keyframes zoomIn {
+0% {transform: scale(0.9);}
+100% {transform: scale(1);}
+}
+
+@keyframes zoomOut {
+0% {transform: scale(1);}
+100% {transform: scale(0.9);}
+}
+
+.base-container .searchControl {
+    height: 40px; /* Adjust height as needed */
+    width: 300px;
+    font-size: 16px; /* Increase font size for better readability */
+    font-style: italic;
+    border: 2px solid #ccc; /* Add a border */
+    border-radius: 5px; /* Add rounded corners */
+    padding: 8px; /* Add padding for better spacing */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+/* Style placeholder text */
+.base-container .searchControl::placeholder {
+    font-style: italic;
+    color: #999; /* Light gray color */
+}
+
+/* Style on focus */
+.searchControl:focus {
+    border-color: #4569a0; /* Change border color when focused */
+    outline: none; /* Remove default focus outline */
+}
+
+.base-container #search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 15px;
+}
+
+.base-container .keanuDiv{
+    padding-right: 20px;
+    z-index: 5;
+}
+
+
+.base-container input.inputlogin {
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    color: #333;
+}
+
+.base-container input.inputlogin:focus {
+    border-color: #646cff;
+    outline: none;
+}
+
+.base-container input.inputlogin{
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1rem;
+    width: 90%;
+    height: 25px;
+}
+
+.base-container #success-message {
+    display: none; /* Start hidden, show it via JavaScript */
+    padding: 20px;
+    background-color: #f0fff0; /* A light green background for subtlety */
+    color: #008000; /* Darker green color for the text */
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 128, 0, 0.2); /* Subtle green shadow */
+    margin: 10px auto; /* Center the message in its container */
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px; /* Maximum width for larger screens */
+    border: 1px solid #008000; /* Solid green border */
+    animation: fadeIn 1s;
+}
+
+.base-container #logout-button {
+    margin: 15px; /* Adds margin around the button */
+    padding: 10px 20px; /* Adds some padding inside the button for better spacing */
+    background-color: #007bff; /* Sets a blue background color */
+    color: white; /* Sets the text color to white */
+    border: none; /* Removes the default border */
+    border-radius: 5px; /* Adds rounded corners to the button */
+    cursor: pointer; /* Changes the cursor to a pointer when hovering over the button */
+    transition: background-color 0.3s ease; /* Adds a smooth background-color transition */
+}
+
+.base-container #logout-button:hover {
+    background-color: #0056b3; /* Darkens the button's background color on hover */
+}
+
+.account-page {
+    margin-top: 8vh; /* Adjust based on the actual navbar height */
+    margin-bottom: 8vh; /* Adjust based on the actual footer height */
+    overflow: auto;
+    /* padding: 1em; /* Example padding; adjust as needed
+    background-color: var(--white);  */
+}
+
+.account-page .container {
+    display: flex;
+    justify-content: space-between;
+    width: auto; /* Change width to auto */
+    max-width: 1200px;
+    min-width: 800px;
+    margin: 5px; /* Reset margins */
+    padding: 30px, 5px; /* Reset padding */
+    align-items: flex-start;
+}
+
+.account-page .container > div {
+    flex: 1; /* Each child will flex to fill the space */
+    min-width: 30%; /* Minimum width for each section, adjust as needed */
+}
+
+
+.account-page .personal-data {
+    flex: 1;
+    margin-right: 20px;
+    padding-left: 20px;
+}
+
+.account-page .reservations {
+    flex: 1;
+}
+
+.account-page form {
+    margin-bottom: 20px;
+}
+
+.account-page label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.account-page input[type="text"],
+.account-page input[type="email"],
+.account-page input[type="password"],
+.account-page input[type="date"],
+.account-page textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: azure;
+}
+.account-page button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.account-page button:hover {
+    background-color: #45a049;
+}
+
+.account-page ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.account-page li {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    list-style: none;
+    background-color: #6f9ac5;
+    font-weight: bold;
+    box-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7;
+}
+
+.account-page h1 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.account-page h2 {
+    font-size: 1.5em;
+    color: #333;
+    padding: 25px;
+    background-color: rgb(15, 56, 109);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: white;
+}
+.account-page #dateofbirth {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc; /* Use accent1 as border color */
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255); /* Use white as background color */
+    color: black; /* Use black as text color */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.account-page #membership-status {
+    border: 1px solid ; /* Add border with accent1 color */
+    border-radius: 4px; /* Add border-radius for rounded corners */
+    padding: 10px; /* Add padding for spacing */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.account-page .reservation-date {
+    width: 100%; /* Set the width to 100% */
+    padding: 8px; /* Add padding */
+    margin-bottom: 10px; /* Add margin bottom */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    box-sizing: border-box; /* Ensure box sizing includes border and padding */
+}
+
+.account-page #personal-data-form {
+    border: 1px solid #868383; /* Add border with accent1 color */
+}
+
+.account-page #welcome-message {
+    flex: 1;
+    font-size: 1em;
+    color: #333;
+    padding-right: 40px;
+    background: linear-gradient(to bottom, #bec8cf, #77a5e7);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    top: 8vh;
+    text-transform: uppercase;
+    border: 2px solid #333;
+}
+
+.account-page #personal-data-h2,
+.account-page #checkoutform-h2,
+.account-page #reservations-h2{
+    font-size: 1.2em;
+    color: #333;
+    padding: 25px;
+    background: linear-gradient(to bottom, #bec8cf, #77a5e7);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border: 2px solid #333;
+}
+
+
+
+.account-page .reservation-form{
+    align-items: center;
+
+}
+
+.account-page .paypal-btn-location
+{
+    margin-top: 10px;
+}
+
+.account-page .del-edit-reservation-response,
+.account-page .updated-response,
+.account-page .checkout-reservation-response,
+.account-page .checkin-reservation-response{
+    background-color: var(--accent1);
+    color: white;
+    margin: auto;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-align: center;
+}
+
+.account-page .edit-reservation-btns-div
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.account-page .update-personal-data-btns-div
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 30px;
+}
+
+.checkoutform-outer-div{
+    margin-left: 20px;
+
+ }
+
+ .account-page .checkoutform-li,
+ .account-page .checkinform-li{
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    list-style: none;
+    display: none;
+}
+
+.account-page .reservation-checkout-contact-div
+{
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.account-page .reservation-checkout-form-btn,
+.account-page .reservation-checkin-form-btn,
+.account-page .update-form-btn,
+.account-page .checkin-update-form-btn,
+.account-page .confirm-checkout-btn,
+.account-page .confirm-checkin-btn,
+.account-page .edit-reservation-btn,
+.account-page .delete-reservation-btn
+{
+    min-width: 165px;
+}
+
+.account-page .checkoutform,
+.account-page .checkinform
+{
+    display: none;
+    align-items: center;
+}
+
+/* .account-page #
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+
+} */
+
+/* Seperate Checkout */
+.account-page .checkout-btns-div,
+.account-page .checkout-reservation-dates,
+.account-page .checkin-reservation-dates
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.account-page .checkout-calculated-price
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+    border: #004494;
+    border-radius: 5px;
+    border-width: 2px;
+    background-color: rgb(15, 56, 109);
+    padding: 20px;
+    color: white;
+    font-weight: bolder;
+    font-size: medium;
+
+}
+
+.account-page .ratings-div
+{
+    padding-left: 5px;
+    display:flex;
+    gap: 80px;
+    align-items: center;
+}
+
+/* Star Rating System */
+.account-page .star-rating {
+    direction: rtl; /* Right-to-left to keep the highest value (5 stars) on the right */
+}
+
+/* Ensure the container of the stars is displayed inline */
+.account-page .star-rating .rating-stars {
+    display: inline-block; /* This makes the container inline but allows internal block styling */
+}
+
+.account-page .star-rating input[type="radio"] {
+    display: none; /* Hide the radio buttons */
+}
+
+.account-page .star-rating label {
+    cursor: pointer;
+    font-size: 24px; /* Adjust the size of the stars */
+    color: #ccc; /* Default star color */
+    display: inline; /* This ensures labels are displayed inline */
+}
+
+.account-page .star-rating input[type="radio"]:checked ~ label {
+    color: #f5a623; /* Highlight color for selected and previous stars */
+}
+
+/* Revert direction for the labels to display the stars correctly */
+.account-page .star-rating label {
+    direction: ltr;
+}
+
+.ball {
+    position: absolute;
+    border-radius: 100%;
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+
+  .reeves-logo {
+    width: auto; /* This will ensure the width is adjusted according to the aspect ratio */
+    height: 64px; /* A typical medium icon size */
+    margin-bottom: -3px;
+    opacity: 0.7; /* Increased opacity for better visibility, adjust as needed */
+    background-color: #6f9ac5; /* A light gray background color */
+}
+
+

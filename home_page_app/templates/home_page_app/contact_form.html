@@ -1,0 +1,40 @@
+{% load static %}
+<head>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<div id="modal" _="on closeModal add .closing then wait for animationend then remove me">
+	<div class="modal-underlay" _="on click trigger closeModal"></div>
+	<div class="modal-content">
+        <center>
+		<h1>Contact Us</h1>
+		<form id="contactForm">
+            {% csrf_token %}
+            <label class="contactlabel" for="name">Name:</label>
+            <input class="contactinput" type="text" id="name" name="name" required>
+            <br>
+            <label class="contactlabel" for="email">Email:</label>
+            <input class="contactinput" type="email" id="email" name="email" required>
+            <br>
+            <label class="contactlabel" for="message">Message:</label>
+            <textarea class="contacttextarea" id="message" name="message" required></textarea>
+            <br>
+            <button _="on click trigger closeModal"
+                    class="contactbtn"
+                    type="submit"
+                    hx-post="{% url 'submit_contact_form' %}"
+                    hx-target="#response-message"
+                    hx-swap="innerHTML">Submit</button>
+
+            <div id="response-message"></div>
+
+        </form>
+		<br>
+		<br>
+		<button _="on click trigger closeModal">Close</button>
+        </center>
+	</div>
+</div>
+
+

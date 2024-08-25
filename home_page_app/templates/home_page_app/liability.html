@@ -1,0 +1,50 @@
+<div id="modal" _="on closeRegisterModal add .closing then wait for animationend then remove me end">
+	<div id="modal-underlay-div" class="modal-underlay" _="on click trigger closeRegisterModal"></div>
+        <div id="modal-content-div" class="modal-content">
+            {% load static %}
+            <link rel="stylesheet" href="{% static 'css/stylereservation.css' %}">
+            <script src="https://unpkg.com/htmx.org@1.5.0/dist/htmx.min.js"></script>
+            <script src="https://unpkg.com/hyperscript.org/dist/_hyperscript.min.js"></script>
+
+            <div id="liability_warning">
+Liability Disclaimer for Holy Keanu Rentals &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Effective Date: April 9, 2024
+<br><br>
+Welcome to Holy Keanu Rentals! &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;[legal@holykeanureeves.org]
+<br><br>
+We appreciate your interest in our rental services.
+Please read this Liability Disclaimer carefully before using our services.
+<br><br>
+1. Acceptance of Terms
+<br><br>
+By accessing and using the services offered by Holy Keanu Rentals, you acknowledge
+and agree to the terms outlined in this Liability Disclaimer. If you do not agree
+with any part of this disclaimer, you must not use our services.
+<br><br>
+2. Disclaimer of Liability
+<br><br>
+Holy Keanu Rentals, including its directors, employees, agents, and affiliates,
+shall not be liable for any injuries, damages, liabilities, losses, or any other
+adverse effects (collectively, "Damages") you may suffer arising out of or in
+connection with the use of our rental services, to the fullest extent permitted
+by law. This includes Damages resulting from the use of or reliance on the
+information provided through our services, as well as Damages caused by the
+temporary unavailability of our service.
+<br><br>
+3. Assumption of Risk
+<br><br>
+You acknowledge and agree that your use of Holy Keanu Rentals services is at
+your sole risk. The services are provided on an "AS IS" and "AS AVAILABLE" basis.
+The risks associated with the use of our rental services, including but not
+limited to personal injury, property damage, and loss, are solely yours.
+<br><br>
+4. Indemnification
+<br><br>
+You agree to indemnify, defend, and hold harmless Holy Keanu Rentals and its
+affiliates, officers, agents, and employees from any claim or demand, including
+reasonable attorneys' fees, made by any third party due to or arising out of
+your breach of this Disclaimer or your violation of any law or the rights of
+a third-party.
+            </div>
+        </div>
+    </div>
+</div>

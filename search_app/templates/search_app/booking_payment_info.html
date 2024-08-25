@@ -1,0 +1,27 @@
+
+
+<div id="payment-info-div">
+    {% load static %}
+    {% load i18n %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylereservation.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://unpkg.com/htmx.org@1.5.0/dist/htmx.min.js"></script>
+    <script src="https://unpkg.com/hyperscript.org/dist/_hyperscript.min.js"></script>
+    <button id="back-to-reservation-btn"
+            _="on click
+            set #rental-agreement-div.style.display to 'none'
+            then set #payment-info-div.style.display to 'none' 
+            then set #reservation.style.display to 'block'">
+            Back to Reservation
+    </button>
+
+    <div id="payment-gateway-div">
+        <h1 id="book-and-pay-h1">Book & Pay Deposit</h1>
+
+        {{paypal_payment.render}}
+        
+    </div>
+    
+          
+
+</div>

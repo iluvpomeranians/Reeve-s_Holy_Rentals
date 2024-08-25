@@ -1,0 +1,75 @@
+<div id="modal" _="on closeRegisterModal add .closing then wait for animationend then remove me end">
+	<div id="modal-underlay-div" class="modal-underlay" _="on click trigger closeRegisterModal"></div>
+	<div id="modal-content-div" class="modal-content">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/stylereservation.css' %}">
+        <script src="https://unpkg.com/htmx.org@1.5.0/dist/htmx.min.js"></script>
+        <script src="https://unpkg.com/hyperscript.org/dist/_hyperscript.min.js"></script>
+        <script>
+                var prices = Array.from(document.querySelectorAll('.competitor-price')).map(function(priceSpan) {
+                    return parseFloat(priceSpan.textContent.replace('$', ''));
+                });
+                
+                var sum = prices.reduce(function(acc, price) {
+                    return acc + price;
+                }, 0);
+                
+                var average = sum / prices.length;
+                var carPrice = parseFloat('{{ car_price }}'); 
+                var percentDifference = ((average - carPrice) / carPrice) * 100;
+            
+                document.getElementById('percentage-difference').textContent = 'Save ' + percentDifference.toFixed(2) + '% compared to competitors!';
+        </script>
+            <div class="comparison-headings-row">
+                <h3 class="compare-matches-title">Compare Matching Cars from local competitors</h3>
+                <h3 id="car-comparison-heading">{{ car_id }} &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Price: ${{ car_price }}/day</h3>
+                {% comment %} <h3 id="keanus-price">Price: ${{ car_price }}/day</h3> {% endcomment %}
+            </div>                    
+            <ul class="price-comparison-list">
+                {% if matching_globe_cars %}
+                    <ul>
+                        {% for car in matching_globe_cars %}
+                            <li>
+                                <span class="competitor-name">Globe : {{ car.model }}</span> 
+                                <span class="competitor-price">${{ car.price }}/day</span>
+                            </li>   
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if matching_kayak_cars %}
+                    <ul>
+                        {% for car in matching_kayak_cars %}
+                            <li>
+                                <span class="competitor-name">Kayak : {{ car.model }}</span> 
+                                <span class="competitor-price">${{ car.price }}/day</span>
+                            </li>   
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% for competitor, price in competitor_prices.items %}
+                    <li>
+                        <span class="competitor-name">{{ competitor }}</span>
+                        <span class="competitor-price">${{ price }} /day</span>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="compare-car-image-container">
+                <img class="compare-car-image" src="{{ car_image_url }}" alt="Car Image">
+            </div>
+                        
+
+            {% if best_offer %}
+                <div id="best-offer-congratulations">
+                    <strong>Congratulations! You have the best offer!
+                        <BR>
+                        <span id="percentage-difference"></span>
+                    </strong>
+                </div>
+            {% else %}
+                <strong>Best offer is: ${{ best_price }}</strong>
+            {% endif %}
+    </div>
+</div>
+
+

@@ -1,0 +1,313 @@
+<div id="modal" _="on closeRegisterModal add .closing then wait for animationend then remove me end">
+	<div id="modal-underlay-div" class="modal-underlay" _="on click trigger closeRegisterModal"></div>
+	<div id="modal-content-div" class="modal-content">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/stylereservation.css' %}">
+        <script src="https://unpkg.com/htmx.org@1.5.0/dist/htmx.min.js"></script>
+        <script src="https://unpkg.com/hyperscript.org/dist/_hyperscript.min.js"></script>
+        <script>
+            var rentalAgreementAccepted = false;
+        </script>
+        {% if request.user.is_authenticated %}
+            <div id="reservation">
+                        <form class="reservation-form">
+                            <div class="form-group">
+
+                                <div class="form-content"> <!-- First column for form labels and inputs -->
+
+                                    <label type="label" name="start_label" id="start_date_label" >Start Date</label>
+
+                                    <label type="label" name="end_label" id="end_date_label">End Date</label>
+
+                                    <input type="date" name="start_date" id="start_date" placeholder="Start Date" required>
+
+                                    <input type="date" name="end_date" id="end_date" placeholder="End Date" required>
+
+                                    <input type="text" name="car_id" id="car_id" value="{{ car_id }}" required disabled>
+
+                                    <input type="text" name="customer_name" id="customer_name" placeholder="Full Name" required>
+
+                                    <input type="email" name="customer_email" id="customer_email" placeholder="Email" required>
+
+                                    <input type="text" name="driver_license" id="driver_license" placeholder="Drivers License" required>
+                                </div>
+                            </div>
+                            <div class="form-image"> <!-- Second column for the image -->
+                                <img id="car_img" src="{{ car_image_url }}" alt="Car Image" class="car-image">
+                            </div>
+                            <div id="missing-fields-alert-div"></div>
+                        <br>
+
+                        <div id="availability-div" class="box"></div>
+                        <div id="reservation-modal-footer">
+                            <button id="check-availability-btn-id" type="button"
+                                class="check-availability-btn"
+                                hx-get="{% url 'check_availability' %}"
+                                hx-target="#check-availability-btn-id"
+                                hx-swap="innerHTML"
+                                hx-vals='js:{car_id: document.getElementById("car_id").value, start_date: document.getElementById("start_date").value, end_date: document.getElementById("end_date").value}'>
+                                Check Availability
+                            </button>
+                        <button id="rental-agreement-btn"
+                                type="button"
+                                class="rental-agreement-btn-class"
+                                _="on click
+                                if #rental-agreement-div.style.display is 'none'
+                                then set #rentalagreementModal.style.display to 'block'
+                                then set #rental-agreement-div.style.display to 'block'"
+                                hx-get="{% url 'rental_agreement' %}"
+                                hx-target="#rental-agreement-div"
+                                hx-swap="innerHTML"
+                                hx-vals='js:{car_id: document.getElementById("car_id").value, start_date: document.getElementById("start_date").value, end_date: document.getElementById("end_date").value, customer_name: document.getElementById("customer_name").value, customer_email: document.getElementById("customer_email").value, driver_license: document.getElementById("driver_license").value}'>
+                                Read Rental Agreement
+                        </button>
+                        <!-- TODO: For proceed we must check that user is logged in, if not then bring up login modal -->
+                        <button disabled
+                                id="proceed-rental-btn"
+                                type="button"
+                                class="proceed-rental-btn-class disabled-btn"
+                                _="on click
+                                set #rental-agreement-div.style.display to 'none'
+                                then set #reservation.style.display to 'none'
+                                then set #payment-form-div.style.display to 'block'"
+                                hx-get="{% url 'render_booking_payment_info' %}"
+                                hx-target="#payment-form-div"
+                                hx-vals='js:{car_id: document.getElementById("car_id").value, start_date: document.getElementById("start_date").value, end_date: document.getElementById("end_date").value, customer_name: document.getElementById("customer_name").value, customer_email: document.getElementById("customer_email").value, driver_license: document.getElementById("driver_license").value}'>
+                                Proceed
+                        </button>
+                        </div>
+
+                    </form>
+
+            </div>
+            <div id="rental-agreement-div"></div>
+            <div id="payment-form-div"></div>
+        {% else %}
+            <div id="login-modal-popup" hx-get="home_page_app/templates/home_page_app/login_modal.html"></div>
+            <script>
+                alert("Please log in first."); // Alert message
+            </script>
+        {% endif %}
+        <script>
+            // Initialize the modal
+            document.getElementById('car_id').style.backgroundColor = '#B2CFF7';
+
+            document.addEventListener("DOMContentLoaded", function() {
+                            var modal = document.getElementById("rental-agreement-modal");
+                            var closeModalSpan = document.querySelector(".modal .close");
+                            var start_date = document.getElementById("start_date");
+                            var end_date = document.getElementById("end_date");
+                            var car_id = document.getElementById("car_id");
+                            var customer_name = document.getElementById("customer_name");
+                            var customer_email = document.getElementById("customer_email");
+                            var driver_license = document.getElementById("driver_license");
+
+                            closeModalSpan.onclick = function() {
+                                modal.style.display = "none";
+                            }
+
+                            window.onclick = function(event) {
+                                if (event.target == modal) {
+                                    modal.style.display = "none";
+                                }
+                            }
+
+                            if(start_date.value.trim() !== '')
+                            {
+                                start_date.style.backgroundColor = '#B2CFF7';
+                            }
+                            if(end_date.value.trim() !== '')
+                            {
+                                end_date.style.backgroundColor = '#B2CFF7';
+                            }
+
+                            if(customer_name.value.trim() !== '')
+                            {
+                                customer_name.style.backgroundColor = '#B2CFF7';
+                            }
+                            if(customer_email.value.trim() !== '')
+                            {
+                                customer_email.style.backgroundColor = '#B2CFF7';
+                            }
+                            if(driver_license.value.trim() !== '')
+                            {
+                                driver_license.style.backgroundColor = '#B2CFF7';
+                            }
+
+
+                        });
+
+
+            // Listen for the htmx afterSwap event
+            document.addEventListener('htmx:afterSwap', function(event) {
+                if (event.detail.target.id === 'rental-agreement-div') {
+                    var content = document.getElementById('rental-agreement-div').innerHTML.trim();
+                    if (content) {
+                        // Hide the 'reservation' div
+                        document.getElementById('reservation').style.display = 'none';
+                    }
+                }
+
+                if (event.detail.target.id === 'check-availability-btn-id') {
+                    var content = document.getElementById('check-availability-btn-id').innerHTML.trim();
+                    if (content) {
+                        if (content.includes('Available')) {
+                            document.getElementById('check-availability-btn-id').style.backgroundColor = '#68c56b';
+                            if (rentalAgreementAccepted){
+                                if (checkallreservationFields()) {
+                                    document.getElementById('missing-fields-alert-div').style.display = 'none';
+                                    document.getElementById('proceed-rental-btn').classList.remove('disabled-btn');
+                                    document.getElementById('proceed-rental-btn').classList.add('enabled-btn');
+                                    document.getElementById('proceed-rental-btn').disabled = false;
+
+                                }
+                                else{
+                                    document.getElementById('missing-fields-alert-div').style.display = 'block';
+                                    document.getElementById('missing-fields-alert-div').innerHTML = 'Please fill out all fields & Accept Rental Agreement';
+                                    document.getElementById('proceed-rental-btn').disabled = true;
+                                }
+                            }
+                        } else {
+                            document.getElementById('missing-fields-alert-div').style.display = 'none';
+                            document.getElementById('check-availability-btn-id').style.backgroundColor = '#4c74af';
+                            document.getElementById('proceed-rental-btn').classList.remove('enabled-btn');
+                            document.getElementById('proceed-rental-btn').classList.add('disabled-btn');
+                            document.getElementById('proceed-rental-btn').disabled = true;
+                        }
+                    }
+                }
+
+            });
+
+            window.addEventListener('agreementAccepted', function(event) {
+                if (event.detail.accepted) {
+                    var acceptedText = document.getElementById('rental-agreement-btn').innerText.trim();
+                    if (acceptedText.includes('Agreement Accepted!')) {
+                        rentalAgreementAccepted = true;
+                        if (document.getElementById('check-availability-btn-id').innerText.trim().includes('Available')) {
+
+                            if (checkallreservationFields()) {
+                                document.getElementById('missing-fields-alert-div').style.display = 'none';
+                                document.getElementById('proceed-rental-btn').classList.remove('disabled-btn');
+                                document.getElementById('proceed-rental-btn').classList.add('enabled-btn');
+                                document.getElementById('proceed-rental-btn').disabled = false;
+                            }
+                            else{
+                                document.getElementById('missing-fields-alert-div').style.display = 'block';
+                                document.getElementById('missing-fields-alert-div').innerHTML = 'Please fill out all fields & Accept Rental Agreement';
+                                document.getElementById('proceed-rental-btn').disabled = true;
+                            }
+                        }
+                        else{
+                            document.getElementById('missing-fields-alert-div').style.display = 'block';
+                            document.getElementById('missing-fields-alert-div').innerHTML = 'Please fill out all fields & Accept Rental Agreement';
+                            document.getElementById('proceed-rental-btn').disabled = true;
+                        }
+                    }
+                }
+            });
+
+            function checkallreservationFields() {
+                var start_date = document.getElementById("start_date").value;
+                var end_date = document.getElementById("end_date").value;
+                var car_id = document.getElementById("car_id").value;
+                var customer_name = document.getElementById("customer_name").value;
+                var customer_email = document.getElementById("customer_email").value;
+                var driver_license = document.getElementById("driver_license").value;
+                if (start_date && end_date && car_id && customer_name && customer_email && driver_license) {
+                    document.getElementById("customer_name").style.backgroundColor = '#B2CFF7';
+                    document.getElementById("customer_email").style.backgroundColor = '#B2CFF7';
+                    document.getElementById("driver_license").style.backgroundColor = '#B2CFF7';
+                    document.getElementById("start_date").style.backgroundColor = '#B2CFF7';
+                    document.getElementById("end_date").style.backgroundColor = '#B2CFF7';
+                    document.getElementById("car_id").style.backgroundColor = '#B2CFF7';
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    if (checkallreservationFields()) {
+                        var availabilityBtn = document.getElementById("check-availability-btn-id");
+                        var agreementBtn = document.getElementById("rental-agreement-btn");
+                        if (availabilityBtn.innerText.includes("Available") && agreementBtn.innerText.includes("Agreement Accepted!")) {
+                            document.getElementById('missing-fields-alert-div').style.display = 'none';
+                            document.getElementById('proceed-rental-btn').classList.remove('disabled-btn');
+                            document.getElementById('proceed-rental-btn').classList.add('enabled-btn');
+                            document.getElementById('proceed-rental-btn').disabled = false;
+                        }
+                        else if
+                        (availabilityBtn.innerText.includes("Available") && !agreementBtn.innerText.includes("Agreement Accepted!")){
+                            document.getElementById('missing-fields-alert-div').style.display = 'block';
+                            document.getElementById('missing-fields-alert-div').innerHTML = 'Please Accept Rental Agreement';
+                            document.getElementById('proceed-rental-btn').classList.remove('enabled-btn');
+                            document.getElementById('proceed-rental-btn').classList.add('disabled-btn');
+                            document.getElementById('proceed-rental-btn').disabled = true;
+                        }
+                    }
+                    else
+                    {
+                        document.getElementById('missing-fields-alert-div').style.display = 'block';
+                        document.getElementById('missing-fields-alert-div').innerHTML = 'Please fill out all fields & Accept Rental Agreement';
+                        document.getElementById('proceed-rental-btn').classList.remove('enabled-btn');
+                        document.getElementById('proceed-rental-btn').classList.add('disabled-btn');
+                        document.getElementById('proceed-rental-btn').disabled = true;
+                    }
+                }
+            });
+
+            // Function to check the date range and click the button if the range is positive
+            function checkDateRangeAndClick() {
+                var startDate = document.getElementById('start_date').valueAsDate;
+                var endDate = document.getElementById('end_date').valueAsDate;
+                var car_id = document.getElementById('car_id').value;
+
+                // Ensure both dates are selected
+                if (startDate && endDate && car_id) {
+                    document.getElementById('check-availability-btn-id').click();
+                }
+
+                if (endDate >= startDate && car_id)
+                {
+                    document.getElementById('start_date').style.backgroundColor = '#B2CFF7';
+                    document.getElementById('end_date').style.backgroundColor = '#B2CFF7';
+                    document.getElementById('car_id').style.backgroundColor = '#B2CFF7';
+                }
+                else{
+                    document.getElementById('start_date').style.backgroundColor = 'white';
+                    document.getElementById('end_date').style.backgroundColor = 'white';
+                }
+            }
+
+            function activeField(inputField) {
+                if (inputField.value.trim() !== '') {
+                    inputField.style.backgroundColor = '#B2CFF7';
+                } else {
+                    inputField.style.backgroundColor = 'white';
+                }
+            }
+
+            //Event bindings for all 6 input fields
+            document.getElementById('end_date').addEventListener('change', checkDateRangeAndClick);
+            document.getElementById('start_date').addEventListener('change', checkDateRangeAndClick);
+
+            document.getElementById('car_id').addEventListener('input', function(event) {
+                activeField(event.target);
+            });
+            document.getElementById('customer_name').addEventListener('input', function(event) {
+                activeField(event.target);
+            });
+            document.getElementById('customer_email').addEventListener('input', function(event) {
+                activeField(event.target);
+            });
+            document.getElementById('driver_license').addEventListener('input', function(event) {
+                activeField(event.target);
+            });
+
+        </script>
+
+    </div>
+</div>
+

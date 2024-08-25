@@ -1,0 +1,83 @@
+{% load static %}
+	<div id="modal" _="on closeLoginModal add .closing then wait for animationend then remove me end
+					   on closeLoginModal2 remove me end">
+		<div class="modal-underlay" _="on click trigger closeLoginModal"></div>
+		<div class="modal-content">
+			<center>
+			<div class="container">
+				<h1>Login to Reeve's Holy Rentals</h1>
+				<script src="{% static 'scripts/validateLogin.js' %}"></script>
+				<form id="login-form" 
+					  hx-post="{% url 'login' %}" 
+					  hx-target="#response-message" 
+					  hx-swap="innerHTML"
+					  onsubmit="return validateLoginForm()">
+					{% csrf_token %}
+					<input class="inputlogin" type="email" id="email" name="email" placeholder="Email Address" required>
+					<BR>
+					<input class="inputlogin" type="password" id="password" name="password" placeholder="Password" required>
+					<BR>
+					<p>Don't have an account? <a id="register-link"
+												 _="on click trigger closeLoginModal2"
+												 hx-get="{% url 'register_modal' %}"
+												 hx-target="body"
+												 hx-swap="beforeend"					
+												 >Register here</a></p>
+					<button type="submit" 
+							class="contactbtn"  
+							hx-target="#response-message" 
+							hx-swap="innerHTML">
+							Login
+					</button>
+					<style>
+						#success-message {
+							display: none; /* Start hidden, show it via JavaScript */
+							padding: 20px;
+							background-color: #f0fff0; /* A light green background for subtlety */
+							color: #008000; /* Darker green color for the text */
+							text-align: center;
+							border-radius: 8px;
+							box-shadow: 0 2px 4px rgba(0, 128, 0, 0.2); /* Subtle green shadow */
+							margin: 10px auto; /* Center the message in its container */
+							width: 100%; /* Adjust width as needed */
+							min-width: 560px; /* Maximum width for larger screens */
+							border: 1px solid #008000; /* Solid green border */
+							animation: fadeIn 1s;
+						}
+	
+						@keyframes fadeIn {
+							from { opacity: 0; }
+							to { opacity: 1; }
+						}
+	
+						#fail-message {
+							display: none; /* Start hidden, show it via JavaScript */
+							padding: 20px;
+							background-color: #fff0f0; /* A light red background for subtlety */
+							color: #d00000; /* Darker red color for the text */
+							text-align: center;
+							border-radius: 8px;
+							box-shadow: 0 2px 4px rgba(208, 0, 0, 0.2); /* Subtle red shadow */
+							margin: 10px auto; /* Center the message in its container */
+							width: 100%; /* Adjust width as needed */
+							max-width: 560px; /* Maximum width for larger screens */
+							border: 1px solid #d00000; /* Solid red border */
+							animation: fadeIn 1s;
+						}
+	
+						@keyframes fadeIn {
+							from { opacity: 0; }
+							to { opacity: 1; }
+						}
+					</style>
+					<div id="response-message" style="display: none;"></div>
+					<div id="success-message"></div>
+					<div id="fail-message"></div>    
+				</form>
+			</div>
+			<br>
+			<br>
+			<button _="on click trigger closeLoginModal">Close</button>
+			</center>
+		</div>
+	</div>

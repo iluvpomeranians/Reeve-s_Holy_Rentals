@@ -1,0 +1,161 @@
+{% extends 'home_page_app/base.html' %}
+
+{% load static %}
+
+{% block title %}Browse Cars{% endblock %}
+
+{% block content %}
+<div id="browse-page" class="browse-page">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylebrowse.css' %}">
+    <div class="container">
+        <form id="search-form" 
+              hx-get="/browse" 
+              hx-trigger="keyup, submit, click" 
+              hx-target="#car-list" 
+              hx-swap="innerHTML" 
+              hx-push-url="false">
+            <input class="inputsearch" type="text" name="make" placeholder="Make" id="make-input">
+            <br>
+            <input class="inputsearch" type="text" name="model" placeholder="Model" id="model-input">
+            <br>
+            <input class="inputsearch" type="text" name="year" placeholder="Year" id="year-input">
+            <br>
+            <input class="inputsearch" type="text" name="rental_price" placeholder="Rental Price" id="rental-price-input">
+            <br>
+            <input class="inputsearch" type="text" name="color" placeholder="Color" id="color-input">
+            <br>
+            <input class="inputsearch" type="text" name="location" placeholder="Location" id="location-input">
+            <br>
+            <button type="button" class="search-btn">Search</button>
+        </form>
+    </div>
+
+    <!-- This is where you'll display the cars dynamically -->
+    <div id="car-list">
+        {% for car in cars %}
+            <div class="car-card">
+                <img src="{{ MEDIA_URL }}{{ car.image }}" alt="{{ car.make }} {{ car.model }}" class="car-image">
+                <div class="car-info">
+                    <h2 class="car-title">{{ car.make }} {{ car.model }}</h2>
+                    <p class="car-year">Year: {{ car.year }}</p>
+                    <p class="car-price">Rental Price: ${{ car.rental_price }}</p>
+                    <p class="car-color">Color: {{ car.color }}</p>
+                    <p class="car-location">Location: {{ car.location }}</p> 
+                
+                    <div class="buttons-car-card">
+                        <button id="browse-compare-button"
+                                hx-post="{% url 'compare' %}?make={{ car.make|urlencode }}&model={{ car.model|urlencode }}&year={{ car.year }}&color={{ car.color|urlencode }}&price={{ car.rental_price|urlencode }}&image={{ MEDIA_URL }}{{ car.image|urlencode }}" 
+                                hx-target="body" 
+                                hx-swap="beforeend"
+                                hx-trigger="click"
+                                hx-indicator="#browse-compare-button"> 
+                                Compare
+                                <img class="htmx-indicator" src="{% static 'images/bars.svg' %}"> 
+                        </button>
+                        <button hx-post="{% url 'render_reservation_page' %}?make={{ car.make|urlencode }}&model={{ car.model|urlencode }}&year={{ car.year }}&color={{ car.color|urlencode }}&price={{ car.rental_price|urlencode }}&image={{ MEDIA_URL }}{{ car.image|urlencode }}" 
+                                hx-target="body" 
+                                hx-swap="beforeend"
+                                hx-trigger="click"                        
+                                class="reserve-button">
+                                Reserve
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+
+    window.onload = function() {
+        var locationInput = document.getElementById('location-input'); 
+        var selectedLocation = localStorage.getItem('selectedLocation');
+        if (selectedLocation) {
+            locationInput.value = selectedLocation;
+            locationInput.click();
+            locationInput.style.backgroundColor = '#B2CFF7'; 
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var locationInput = document.getElementById('location-input'); 
+        var selectedLocation = localStorage.getItem('selectedLocation');
+        var makeInput = document.getElementById('make-input');
+        var modelInput = document.getElementById('model-input');
+        var yearInput = document.getElementById('year-input');
+        var rentalPriceInput = document.getElementById('rental-price-input');
+        var colorInput = document.getElementById('color-input');
+
+
+        if (locationInput.value.trim() !== '') {
+            locationInput.style.backgroundColor = '#B2CFF7';
+        }
+
+        if (makeInput.value.trim() !== '') {
+            makeInput.style.backgroundColor = '#B2CFF7';
+        }
+        
+        if (modelInput.value.trim() !== '') {
+            modelInput.style.backgroundColor = '#B2CFF7';
+        }
+
+        if (yearInput.value.trim() !== '') {
+            yearInput.style.backgroundColor = '#B2CFF7';
+        }
+
+        if (rentalPriceInput.value.trim() !== '') {
+            rentalPriceInput.style.backgroundColor = '#B2CFF7';
+        }
+
+        if (colorInput.value.trim() !== '') {
+            colorInput.style.backgroundColor = '#B2CFF7';
+        }
+
+    });
+
+    function activeField(inputField) {
+        if (inputField.value.trim() !== '') {
+            inputField.style.backgroundColor = '#B2CFF7';
+        } else {
+            inputField.style.backgroundColor = 'white';
+        }
+    }
+
+    document.getElementById('location-input').addEventListener('input', function(event) {
+        activeField(event.target); 
+    });
+
+    document.getElementById('make-input').addEventListener('input', function(event) {
+        activeField(event.target); 
+    });
+
+    document.getElementById('model-input').addEventListener('input', function(event) {
+        activeField(event.target); 
+    });
+
+    document.getElementById('year-input').addEventListener('input', function(event) {
+        activeField(event.target); 
+    });
+
+    document.getElementById('rental-price-input').addEventListener('input', function(event) {
+        activeField(event.target); 
+    });
+
+    document.getElementById('color-input').addEventListener('input', function(event) {
+        activeField(event.target); 
+    });
+    
+    //** BACK UP LOADING INDICATOR CODE **//
+    // document.addEventListener('htmx:beforeRequest', function(event) {
+    // if (event.target.id === 'browse-compare-button') {
+    //     event.target.innerHTML = 'Loading...'; // Change this to your loading spinner or message
+    // }
+    // });
+
+    // document.addEventListener('htmx:afterRequest', function(event) {
+    //     if (event.target.id === 'browse-compare-button') {
+    //         event.target.innerHTML = 'Compare'; // Change it back to the original text
+    //     }
+    // });
+</script>
+{% endblock %}

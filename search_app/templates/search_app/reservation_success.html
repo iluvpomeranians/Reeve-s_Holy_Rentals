@@ -1,0 +1,36 @@
+{% extends 'home_page_app/base.html' %}
+
+{% load static %}
+
+{% block title %}Reservation Success{% endblock %}
+
+{% block content %}
+
+<div id="reservation-success-container" class="reservation-success">
+    <title>Reservation Success</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylesuccess.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
+    <div class="container mt-5">
+        <div class="reservation-success bg-white text-center p-5 rounded">
+            <img src="{% static 'css/successIcon.webp' %}" alt="Success" class="success-icon mb-3">
+            <h1 class="mb-4">Reservation Confirmed!</h1>
+            <div class="reservation-details">
+                <p><strong>Car ID:</strong> {{ reservation.car_id }}</p>
+                <p><strong>Start Date:</strong> {{ reservation.start_date }}</p>
+                <p><strong>End Date:</strong> {{ reservation.end_date }}</p>
+                <p><strong>Customer Name:</strong> {{ reservation.customer_name }}</p>
+                <p><strong>Driver License:</strong> {{ reservation.driver_license }}</p>
+                <p><strong>500$ Deposit: Received</strong></p>
+                <p><strong>Confirmation Email Sent To:</strong> {{ reservation.customer_email }}</p>
+            </div>
+            <a href="{% url 'index' %}" class="btn btn-primary mt-4"><i class="fas fa-home"></i> Return to Home</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+    
+
+

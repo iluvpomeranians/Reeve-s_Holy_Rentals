@@ -1,0 +1,53 @@
+
+.headnav {
+  width: calc(100%); 
+}
+
+#reservation-success-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  height: 80%;
+  margin: auto;
+}
+
+#reservation-success-container .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+}
+
+#reservation-success-container .success-icon {
+  width: 75px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+#reservation-success-container h1 {
+  font-size: 28px;
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+#reservation-success-container .reservation-details p {
+  line-height: 1.6;
+  border-bottom: 1px solid #eee;
+  padding: 8px;
+}
+
+#reservation-success-container .reservation-details p:last-child {
+  border-bottom: none;
+}
+
+#reservation-success-container strong {
+  color: #555;
+}
+
+.footernav{
+  width: 100%;
+}

@@ -1,0 +1,142 @@
+{% load static %}
+
+<div id="rentalagreementModal" class="rental-modal">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylereservation.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.5.0/dist/htmx.min.js"></script>
+    <script src="https://unpkg.com/hyperscript.org/dist/_hyperscript.min.js"></script>
+    <div class="modal-header">
+        <button id="accept-rental-agreement-btn" 
+                _="on click 
+                    set window.rentalAgreementAccepted to true
+                    then put 'Agreement Accepted!' into my innerText
+                    then put 'Agreement Accepted!' into #rental-agreement-btn.innerText
+                    then put '#68c56b' into #rental-agreement-btn.style.backgroundColor
+                    then put '#68c56b' into my style.backgroundColor
+                    then wait 1500ms
+                    then set #rental-agreement-div.style.display to 'none'
+                    then set #reservation.style.display to 'block'
+                    ">
+            Accept Rental Agreement
+        </button>
+        <button id="decline-rental-agreement-btn">
+            Decline
+        </button>
+        <button id="download-rental-agreement-btn"
+                type="button" 
+                class="download-rental-agreement-btn-class">
+                Download      
+        </button>
+        <button id="back-to-form-btn"
+                _="on click 
+                set #rental-agreement-div.style.display to 'none' 
+                then set #reservation.style.display to 'block'">
+            Back to Form
+        </button>
+    </div>
+    <div id="modal-content-div" class="modal-content">
+        <span class="close">&times;</span>
+        <pre>
+            <div id="rental-contract-div">
+                Car Rental Agreement
+    
+    Rental Agreement Number: [Unique Rental Agreement Number]
+    
+    This Rental Agreement ("Agreement") is entered into between [Car Rental Agency Name], located at [Address], hereinafter referred to as the "Rental Company," and the individual or entity identified below, hereinafter referred to as the "Renter":
+    
+    1. Renter's Information:
+    
+    Name:
+    Address:
+    Contact Number:
+    Email Address:
+    Driver's License Number:
+    2. Vehicle Information:
+    
+    Make:
+    Model:
+    Year:
+    License Plate Number:
+    Vehicle Identification Number (VIN):
+    Color:
+    3. Rental Details:
+    
+    Rental Start Date:
+    Rental End Date:
+    Pick-up Location:
+    Drop-off Location:
+    Rental Period:
+    Mileage Limit (if applicable):
+    Rental Rate:
+    Additional Services (if any):
+    4. Rental Terms and Conditions:
+    
+    The Renter acknowledges receiving the vehicle described above in good condition and agrees to return it to the Rental Company in the same condition, subject to normal wear and tear.
+    The Renter agrees to use the vehicle solely for personal or business purposes and not for any illegal activities.
+    The Renter agrees to pay the Rental Company the agreed-upon rental rate for the specified rental period. Additional charges may apply for exceeding the mileage limit, late returns, fuel refueling, or other damages.
+    The Renter agrees to bear all costs associated with traffic violations, tolls, and parking fines incurred during the rental period.
+    The Renter acknowledges that they are responsible for any loss or damage to the vehicle, including theft, vandalism, accidents, or negligence, and agrees to reimburse the Rental Company for all repair or replacement costs.
+    The Renter agrees to return the vehicle to the designated drop-off location at the agreed-upon date and time. Failure to do so may result in additional charges.
+    The Rental Company reserves the right to terminate this agreement and repossess the vehicle without prior notice if the Renter breaches any terms or conditions of this agreement.
+    The Renter acknowledges receiving and reviewing a copy of the vehicle's insurance coverage and agrees to comply with all insurance requirements during the rental period.
+    5. Indemnification:
+    
+    The Renter agrees to indemnify and hold harmless the Rental Company, its employees, agents, and affiliates from any claims, liabilities, damages, or expenses arising out of or related to the Renter's use of the vehicle.
+    
+    6. Governing Law:
+    
+    This Agreement shall be governed by and construed in accordance with the laws of [Jurisdiction]. Any disputes arising under or related to this Agreement shall be resolved exclusively by the courts of [Jurisdiction].
+    
+    7. Entire Agreement:
+    
+    This Agreement constitutes the entire understanding between the parties concerning the subject matter hereof and supersedes all prior agreements and understandings, whether written or oral.
+    
+    8. Signatures:
+    
+    The parties hereto have executed this Agreement as of the date first written above.
+    
+    Rental Company:
+    
+    Signature: ___________________________
+    
+    Print Name: __________________________
+    
+    Date: _______________________________
+    
+    Renter:
+    
+    Signature: ___________________________
+    
+    Print Name: __________________________
+    
+    Date: _______________________________
+    </div>
+            
+            </pre>
+            
+           
+        </div>
+        
+    </div>
+</div>
+<script>
+    // Close modal logic
+    var modal = document.getElementById("rentalagreementModal");
+    var span = document.querySelector(".close");
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // Send a custom event to the window object when the rental agreement is accepted
+    document.getElementById('accept-rental-agreement-btn').addEventListener('click', function() {
+        setTimeout(() => { // Use setTimeout to ensure it runs after Hyperscript actions
+            window.dispatchEvent(new CustomEvent('agreementAccepted', {detail: {accepted: true}}));
+        }, 0);
+    });
+</script>

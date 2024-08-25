@@ -1,0 +1,88 @@
+{% load static %}
+<div id="modal" _="on closeRegisterModal add .closing then wait for animationend then remove me end
+                   on closeRegisterModal2 remove me end">
+	<div class="modal-underlay" _="on click trigger closeRegisterModal"></div>
+	<div class="modal-content">
+        <center>
+            <div class="container">
+                <h1>Signup for Car Rentals</h1>
+                <script src="{% static 'scripts/registeruser.js' %}"></script>
+                <form id="signup-form" 
+                      onsubmit="return validateRegisterForm()"
+                      hx-post="{% url 'register_user' %}"
+                      hx-target="#form-response-message" 
+                      hx-swap="innerHTML">
+                    {% csrf_token %}
+                    <input class="inputlogin" type="text" id="firstname" name="firstname" placeholder="First Name" required>
+                    <BR>
+                    <input class="inputlogin" type="text" id="lastname" name="lastname" placeholder="Last Name" required>
+                    <BR>
+                    <input class="inputlogin" type="email" id="email" name="email" placeholder="Email Address" required>
+                    <BR>
+                    <input class="inputlogin" type="password" id="password" name="password" placeholder="Password" required>
+                    <BR>
+                    <input class="inputlogin" type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                    <BR>
+                    <input class="inputlogin" type="text" id="license" name="license" placeholder="Driver's License Number" required>
+                    <button type="submit" 
+                            class="register-btn"
+                            hx-target="#form-response-message" 
+						    hx-swap="innerHTML">Register</button>
+
+                    <style>
+                        #success-form-message {
+                            display: none; /* Start hidden, show it via JavaScript */
+                            padding: 20px;
+                            background-color: #f0fff0; /* A light green background for subtlety */
+                            color: #008000; /* Darker green color for the text */
+                            text-align: center;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 4px rgba(0, 128, 0, 0.2); /* Subtle green shadow */
+                            margin: 10px auto;
+                            width: 90%; /* Adjust width as needed */
+                            max-width: 600px; /* Maximum width for larger screens */
+                            border: 1px solid #008000; /* Solid green border */
+                            animation: fadeIn 1s;
+                        }
+    
+                        @keyframes fadeIn {
+                            from { opacity: 0; }
+                            to { opacity: 1; }
+                        }
+    
+                        #fail-form-message {
+                            display: none; /* Start hidden, show it via JavaScript */
+                            padding: 20px;
+                            background-color: #fff0f0; /* A light red background for subtlety */
+                            color: #d00000; /* Darker red color for the text */
+                            text-align: center;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 4px rgba(208, 0, 0, 0.2); /* Subtle red shadow */
+                            margin: 10px auto; /* Center the message in its container */
+                            width: 90%; /* Adjust width as needed */
+                            max-width: 600px; /* Maximum width for larger screens */
+                            border: 1px solid #d00000; /* Solid red border */
+                            animation: fadeIn 1s;
+                        }
+    
+                        @keyframes fadeIn {
+                            from { opacity: 0; }
+                            to { opacity: 1; }
+                        }
+                    </style>
+                    <div id="form-response-message" style="display:none"></div>
+                    <div id="success-form-message"></div>
+                    <div id="fail-form-message"></div>
+                    <p>Already have an account? <a id="login-link"
+                                                   _="on click trigger closeRegisterModal2"
+                                                   hx-get="{% url 'login_modal' %}"
+                                                   hx-target="body"
+                                                   hx-swap="beforeend">Login here</a></p>
+                </form>
+            </div>
+		<br>
+		<br>
+		<button _="on click trigger closeRegisterModal">Close</button>
+        </center>
+	</div>
+</div>

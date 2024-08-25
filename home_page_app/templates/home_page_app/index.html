@@ -1,0 +1,88 @@
+{% extends 'home_page_app/base.html' %}
+
+{% load static %}
+
+{% block title %}Reeve's Holy Rentals{% endblock %}
+
+{% block extrahead %}
+    <script src="{% static 'scripts/geolocateMap.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div class="welcomeDiv">
+        <div class="quickSearch">
+            <img src="{% static 'images/reeves_w_car.png' %}" alt="Reeves Logo" class="reeves-logo">
+            <h2>Ask Reeves</h2>
+            <div>
+                <form id="search-by-field" hx-get="/search_by_field" hx-trigger="keyup, submit" hx-target="#search-results" hx-swap="innerHTML" hx-push-url="false">
+                <input type="text" placeholder="Make" name="make" />
+                <input type="text" placeholder="Model" name="model" />
+                <input type="text" placeholder="Year" name="year" />
+                <input type="text" placeholder="Rental Price" name="rental_price" />
+                <input type="text" placeholder="Color" name="color" class="color-input" />
+                <button class="quick-submit" type="button">Search</button>
+            </div>
+            </form>
+        </div>
+
+        <div class="keanuDiv">
+            <pre id="keanuPre">
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⣰⣿⣿⣿⣿⣿⠿⠿⣿⣿⣿⣿⣿⣿⣧⢀⠀⠀⠀⠀
+    ⠀⠀⣿⣿⣿⠋⠀⠀⠀⠀⠀⠙⠀⠙⣿⣿⣿⣷⢳⢀⠀⠀⠀
+    ⠀⣠⣿⣿⣿⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⢀
+    ⠀⣸⣿⣿⣿⠸⠀⠀⠀⠒⠒⠒⠐⠀⠀⢿⣿⣿⣿⣿⣿⠀⠀
+    ⣴⣿⣿⣿⣿⡿⠀⠒⣋⣙⡒⢰⠀⠤⣖⠒⢾⣿⣿⣿⣧⠀⠀
+    ⢺⣿⣿⣿⣿⢀⠀⠀⠉⠉⠉⠸⠀⡇⠉⠉⠀⢿⣿⣿⣿⣄⠀⠀
+    ⠀⠙⣿⣿⣧⢻⠀⠀⠀⠀⠀⠠⠀⠰⠀⠀⠀⣸⠸⣿⣿⠿⠰⠀
+    ⠀⠀⠀⠹⣿⣿⣿⣷⠀⡠⠙⣲⣔⣅⢡⣰⣷⣿⣿⣿⣧⠀⠀⠀
+    ⠀⠀⠀⣼⣿⣿⣿⣿⠀⡿⠭⠭⠭⠭⢿⠀⣿⢻⣿⣿⠃⠀⠀⠀
+    ⠀⠀⠀⠙⠛⣿⢻⠹⣿⠐⠙⠛⠟⠉⢀⣴⡟⢿⣿⡏⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠻⣦⣤⣶⠾⠋⠀⠀⠁⡦⢄⢀⠀⠀⠀
+    ⠀⠀⠀⡠⠁⡇⠑⢄⠀⠀⠀⠀⠀⠀⠔⠀⠀⠁⠀⠀⠀⠉⠁
+    ⠀⠔⠊⠁⠀⠀⣇⠀⠀⠀⠑⡤⠤⢎⠁⠀⠀⡘⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⢢⠠⠀⡠⢆⠀⠀⡠⠙⢄⠀⡸⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⡠⠁⡇⠑⢄⠀⠀⠀⠀⠀⠀⠔⠀⠀⠁⠀⠀⠀⠉⠁
+            You're breathtaking
+            </pre>
+        </div>
+
+        <div id="search-results">
+          <!-- Search results will be loaded here -->
+        </div>
+
+    </div>
+
+    <div class="bubble-container">
+        <div class="bubble">
+            <form id="postal-code-form">
+                <input type="text" placeholder="Nearest by Postal Code" name="postal_code" id="postalCode">
+                <button type="submit">Search</button>
+                <button id="geolocate">Use my location</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dropdown menu for selecting airports -->
+    <div class="airport-dropdown-container">
+        <select id="airport-dropdown">
+            <option value="" style="color: grey;" selected>Search by Airport</option>
+            <!-- Options for airports will be populated dynamically via JavaScript -->
+        </select>
+    </div>
+
+    <div id="mapid" style="height: 400px;"></div>
+
+    <main>
+
+        <section id="about">
+
+        </section>
+
+        <section id="services"></section>
+
+    </main>
+
+{%endblock%}
+

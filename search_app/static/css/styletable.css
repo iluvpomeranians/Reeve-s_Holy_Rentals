@@ -1,0 +1,94 @@
+/* table_style.css */
+
+.resultstable {
+    position: relative;
+    width: 100%;
+    /* margin: 20px 0; */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+    z-index: 100;
+}
+
+.resultstable th, .resultstable td {
+    border: 1px solid #ddd;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+.resultstable th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.resultstable .compare-button, .reserve-button{
+    display: inline-block;
+    opacity: 1;
+    border-radius: 3px;
+}
+
+.resultstable .compare-button:hover, .reserve-button:hover {
+    background-color: #9ccdb8;
+    color: #ffffff;
+}
+
+.resultstable tr:hover {
+    background-color: #859dfc;
+}
+
+.th_inner {
+    font-weight: bold;
+}
+
+.td_results {
+    color: #ffffff;
+}
+
+.fade-me-in {
+    animation: fadeIn ease 1s;
+    -webkit-animation: fadeIn ease 1s;
+    -moz-animation: fadeIn ease 1s;
+    -o-animation: fadeIn ease 1s;
+    -ms-animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+
+.quick-htmx-indicator{
+    opacity:0;
+    transition: opacity 500ms ease-in;
+    display: none;
+}
+
+.htmx-request .quick-htmx-indicator {
+    display: inline-block;
+    opacity: 1;
+}
+
+.htmx-request.quick-htmx-indicator{
+    display: inline-block;
+    opacity:1
+}

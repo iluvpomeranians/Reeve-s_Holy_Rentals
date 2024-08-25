@@ -1,0 +1,21 @@
+<div id="modal" _="on closeRegisterModal add .closing then wait for animationend then remove me end">
+	<div id="modal-underlay-div" class="modal-underlay" _="on click trigger closeRegisterModal"></div>
+        <div id="modal-content-div" class="modal-content">
+            {% load static %}
+            <link rel="stylesheet" href="{% static 'css/stylereservation.css' %}">
+            <script src="https://unpkg.com/htmx.org@1.5.0/dist/htmx.min.js"></script>
+            <script src="https://unpkg.com/hyperscript.org/dist/_hyperscript.min.js"></script>
+
+            <div id="careers">
+                <span style="font-size: 30px; font-family: Arial;">Careers at Reeves Holy Rentals</span><br>         
+                <br>
+                Interested in joining our team? 
+                <br><br>
+                We're always looking for talented individuals to help us grow.
+                <br><br>
+                <span style="margin:10px;">Send us an email with you CV at: [careers@ReevesHolyRentals.org]</span>
+                <img src="{% static 'images/join_us.jpg' %}" alt="Careers Logo" class="careers-logo">
+            </div>
+        </div>
+    </div>
+</div>

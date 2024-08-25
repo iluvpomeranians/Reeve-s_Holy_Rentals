@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Base_Navigation{% endblock %}</title>
+    <title>Reeve's Holy Rentals</title>
+    <link rel="icon" type="image/jpeg" href="{% static 'icons/holy-keanu-reeves.jpg' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{% static 'scripts/logout.js' %}" defer></script>
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/debug.js"></script>
+    <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    {% block extrahead %}{% endblock %}
+</head>
+
+<body class="base-container" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+    <nav class="headnav">
+        <ul>
+            <li><a href="/"><i class="fas fa-home"></i>  Home</a></li>
+            <li><a href="/browse/">
+                <i class="fas fa-search"></i>
+                Browse</a></li>
+            <li id="account-li"{% if not request.session.logged_in %} style="display: none;"{% endif %}>
+                <a href="{% url 'account_page' %}" id="account-link">
+                    <i class="fas fa-user"></i> Account
+                </a>
+                <button id="logout-button" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </li>
+            <li id="login-li"{% if request.session.logged_in %} style="display: none;"{% endif %}>
+                <a hx-get="/login_modal" hx-target="body" hx-swap="beforeend">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+            </li>
+            <li id="register-li"{% if request.session.logged_in %} style="display: none;"{% endif %}>
+                <a hx-get="/register_modal" hx-target="body" hx-swap="beforeend">
+                    <i class="fas fa-user-plus"></i> Register
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <nav class="footernav">
+            <ul>
+                <li><a class="nav-link"
+                       hx-get="/contact"
+                       hx-target="body"
+                       hx-swap="beforeend">
+                       <i class="fas fa-envelope"></i>
+                       Contact</a>
+                </li>
+                <li>
+                    <a hx-get="/liability"
+                       hx-target="body"
+                       hx-swap="beforeend">
+                        <i class="fas fa-balance-scale"></i>
+                        Liability</a>
+                </li>
+                <li><a hx-get="/careers"
+                       hx-target="body"
+                       hx-swap="beforeend">
+                    <i class="fas fa-briefcase"></i>
+                    Careers</a>
+                </li>
+                <li><a href="/admin/"><i class="fas fa-user-shield"></i>  Admin</a></li>
+            </ul>
+
+        </nav>
+    </footer>
+</body>
+</html>

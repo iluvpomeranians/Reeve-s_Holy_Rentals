@@ -1,0 +1,547 @@
+#reservation
+{
+    width: 100%;
+    height: 100%;
+    display: flex-wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+}
+
+#reservation #reservation-form {
+    width: 45%; /* Adjusted width */
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center the form */
+}
+
+#reservation .form-group {
+    margin-bottom: 30px;
+}
+
+#reservation label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#reservation input[type="text"],
+#reservation input[type="email"],
+#reservation input[type="date"] {
+    width: 45%; /* Adjusted width */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#reservation #car_id,
+#reservation #start_date,
+#reservation #end_date,
+#reservation #customer_name,
+#reservation #customer_email,
+#reservation #driver_license {
+    margin-bottom: 10px;
+}
+
+#reservation #rental-agreement-btn, #reservation .check-availability-btn,
+#rentalagreementModal #accept-rental-agreement-btn,
+#rentalagreementModal #decline-rental-agreement-btn,
+#rentalagreementModal #close-rental-agreement-btn,
+#rentalagreementModal #download-rental-agreement-btn,
+#rentalagreementModal #back-to-form-btn,
+#payment-info-div #back-to-reservation-btn
+{
+    background-color: #4c74af;
+    color: #fff;
+    border: none;
+    padding: 10px; /* Increased padding */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s; /* Smooth transition */
+    display: block; /* Ensures the button is block-level */
+    margin: auto;
+    justify-items: auto;
+}
+
+#reservation .proceed-rental-btn-class.disabled-btn {
+    background-color: #848484;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: not-allowed;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: block;
+    margin: auto;
+    justify-content: center;
+}
+
+#reservation .proceed-rental-btn-class.enabled-btn {
+    background-color: #08542e;
+    color: #fff;
+    border: none;
+    padding: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: block;
+    margin: auto;
+    justify-content: center;
+}
+
+
+#reservation .check-availability-btn:hover,
+#reservation #rental-agreement-btn:hover,
+#rentalagreementModal #accept-rental-agreement-btn:hover,
+#rentalagreementModal #decline-rental-agreement-btn:hover,
+#rentalagreementModal #close-rental-agreement-btn:hover,
+#rentalagreementModal #download-rental-agreement-btn:hover,
+#rentalagreementModal #back-to-form-btn:hover
+{
+    background-color: #f0c769;
+    transform: scale(1.05); /* Scale effect on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+#reservation .form-group {
+    display: flex;
+    flex-wrap: wrap; /* Allows the content to wrap on smaller screens */
+    gap: 20px; /* Adds some space between your columns */
+}
+
+#reservation .form-content, #reservation .form-image {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 300px; /* Ensures columns don't become too narrow */
+    padding: 5px;
+    gap: 10px;
+    justify-content: center;
+}
+
+#reservation .form-image {
+    max-width: 600px; /* Sets the maximum width of the container (and thus the image) */
+    margin: 20px auto; /* Centers the container on the page with some margin above and below */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
+    border-radius: 8px; /* Optional: rounds the corners of the container for a softer look */
+    overflow: hidden; /* Ensures no part of the image or box shadow spills outside of the rounded corners */
+
+}
+
+#reservation .car-image {
+    min-width: 100%; /* Ensures the image is responsive and does not exceed its parent container's width */
+    height: auto;
+    display: block; /* Prevents inline default spacing below the image */
+    margin: 0 auto; /* Centers the image within its container */
+    max-height: 400px; /* Optional: you can set a max height to further control the image display */
+    border-radius: 8px;
+}
+
+#start_date_label, #end_date_label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    padding: 60px;
+    padding-bottom: 2px;
+    padding-top: 5px;
+    justify-content: space-between;
+}
+
+
+#availability-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
+
+
+#availability-div.box {
+    background: hsl(0, 0%, 100%);
+    padding: 16px 24px;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.01);
+}
+
+#availability-div.box::after {
+    position: absolute;
+    content: "";
+    top: 15px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.9) translateZ(0);
+    filter: blur(15px);
+    background: linear-gradient(
+      to left,
+      #ff5770,
+      #e4428d,
+      #c42da8,
+      #9e16c3,
+      #6501de,
+      #9e16c3,
+      #c42da8,
+      #e4428d,
+      #ff5770
+    );
+    background-size: 200% 200%;
+    animation: animateGlow 1.25s linear infinite;
+}
+
+@keyframes animateGlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+/*
+#rentalagreementModal{
+    width: 100vh;
+} */
+
+#rentalagreementModal .rental-modal {
+    display: none; /* Hidden by default */
+    position: relative; /* Stay in place */
+    z-index: 1200; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: azure;
+    padding-bottom: 15px;
+  }
+
+  #rentalagreementModal .modal-content {
+    background-color: #fefefe;
+    margin: 20px auto 40px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Adjust as needed */
+    max-height: 70vh; /* Maximum height */
+    overflow-y: auto; /* Enable vertical scrolling within the modal content */
+    position: relative;
+    background-color: rgb(235, 235, 235);
+
+  }
+
+  #rentalagreementModal .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  #rentalagreementModal .close:hover,
+  #rentalagreementModal .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+
+  #rentalagreementModal .modal-header {
+    display: flex;
+    justify-content: space-around; /* This spaces items equidistantly across the header */
+    align-items: center; /* Vertically centers the items */
+    padding: 0px, 6px, 10px;
+    margin-bottom: 10px;
+    gap: 1vh;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+  }
+
+
+#reservation-modal-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
+    background-color: rgb(255, 255, 255);
+    width: 94%;
+}
+
+#missing-fields-alert-div {
+    display: none;
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#payment-form{
+    margin-top: 10px;
+}
+
+#payment-info-div .form-group {
+    margin-bottom: 20px;
+}
+
+#payment-info-div label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+#payment-info-div input[type="text"],
+#payment-info-div input[type="email"],
+#payment-info-div input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+#payment-info-div .form-actions {
+    margin-top: 30px;
+    text-align: right;
+}
+
+#payment-info-div .submit-btn {
+    padding: 10px 20px;
+    background-color: #68c56b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* #payment-info-div .submit-btn:hover {
+    background-color: #5da959;
+} */
+
+#payment-info-title-div {
+    display: flex;
+    justify-content: space-between; /* This spreads out the items */
+    align-items: center; /* Aligns items vertically in the center */
+}
+
+/* Adjust the ID selector to match your HTML */
+#payment-info-div {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    text-align: center; /* Ensure text elements are centered */
+}
+
+#payment-info-div #payment-gateway-div {
+    width: 100%; /* Take full width to respect flex alignment, or set a specific width */
+    display: flex;
+    flex-direction: column; /* Ensure the form and h1 are stacked vertically */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Adjust as needed for spacing */
+}
+
+#payment-gateway-div input[type="image"] {
+    display: block; /* Make the input behave like a block element */
+    margin: 0 auto; /* Auto margins on the side center block elements horizontally */
+    width: 300px; /* Example width, adjust as needed */
+    height: auto; /* Keep the aspect ratio of the image */
+}
+
+#accepted-methods-of-payment-div {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.price-comparison-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.price-comparison-list li {
+    background-color: #faffbe;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.competitor-name {
+    font-weight: bold;
+    color: #333;
+}
+.competitor-price {
+    color: #007bff;
+    font-weight: bold;
+}
+
+#best-offer-congratulations {
+    background-color: #4c8baf;
+    color: white; /* White text color */
+    margin: 20px 0;
+    margin-top: 0;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #3e628e;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 2px #99ccff, 0 0 4px #99ccff, 0 0 6px #99ccff, 0 0 8px #2196F3, 0 0 10px #2196F3, 0 0 12px #2196F3, 0 0 14px #2196F3;
+    }
+    to {
+        box-shadow: 0 0 3px #99ccff, 0 0 6px #99ccff, 0 0 9px #99ccff, 0 0 12px #2196F3, 0 0 15px #2196F3, 0 0 18px #2196F3, 0 0 21px #2196F3;
+    }
+}
+
+#car-comparison-heading{
+    color: #fff; /* Light color for text to stand out on dark background */
+    text-align: center;
+    width: 100%;
+    margin-top: 5px; /* Increased margin for more spacing */
+    font-size: 22px; /* Slightly larger font size for emphasis */
+    font-weight: 600; /* Bold font weight */
+    padding: 10px 5px; /* Adjusted padding for better proportion */
+    background: linear-gradient(135deg, #007bff, #87aed7); /* Gradient background incorporating #007bff */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for better legibility */
+}
+
+.compare-matches-title
+{
+    color: #fff; /* Light color for text to stand out on dark background */
+    text-align: center;
+    width: 100%;
+    margin-top: 2px; /* Increased margin for more spacing */
+    font-size: 24px; /* Slightly larger font size for emphasis */
+    font-weight: 600; /* Bold font weight */
+    padding: 10px 5px; /* Adjusted padding for better proportion */
+    background: linear-gradient(135deg, #007bff, #87aed7); /* Gradient background incorporating #007bff */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for better legibility */
+    margin-bottom: 5px;
+}
+
+.comparison-headings-row {
+    display: flex;
+    align-items: center; /* Vertically centers the items */
+    justify-content: space-between; /* Distributes space between and around content items */
+    flex-wrap: wrap; /* Allows flex items to wrap within the container */
+}
+
+#local-competitor-prices {
+    color: #333; /* Dark grey color for text */
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 10px; /* Larger font size for heading */
+    border-style: double;
+    padding: 10px;
+}
+
+.compare-car-image-container {
+    max-width: 600px; /* Sets the maximum width of the container (and thus the image) */
+    transform: scale(0.8);
+    /* margin: 5px auto; Centers the container on the page with some margin above and below */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
+    border-radius: 8px; /* Optional: rounds the corners of the container for a softer look */
+    overflow: hidden; /* Ensures no part of the image or box shadow spills outside of the rounded corners */
+}
+
+.compare-car-image {
+    width: 100%; /* Ensures the image is responsive and does not exceed its parent container's width */
+    height: auto; /* Maintains the image's aspect ratio */
+    display: block; /* Prevents inline default spacing below the image */
+    margin: 0 auto; /* Centers the image within its container */
+    max-height: 400px; /* Optional: you can set a max height to further control the image display */
+}
+
+
+#payment-gateway-div #book-and-pay-h1, #final-payment-h1 {
+    color: #fff; /* Light color for text to stand out on dark background */
+    text-align: center;
+    min-width: 100%;
+    margin-top: 25px; /* Increased margin for more spacing */
+    font-size: 24px; /* Slightly larger font size for emphasis */
+    font-weight: 600; /* Bold font weight */
+    padding: 10px 5px; /* Adjusted padding for better proportion */
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient background incorporating #007bff */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow for better legibility */
+    opacity: 0.4;
+}
+
+#booking-deposit-img {
+    display: block; /* Make the input behave like a block element */
+    margin: 0 auto; /* Auto margins on the side center block elements horizontally */
+    width: 300px; /* Example width, adjust as needed */
+    height: auto; /* Keep the aspect ratio of the image */
+}
+
+#liability-warning
+{
+    color: black;
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 20px;
+    font-size: 5px; /* Larger font size for heading */
+    border-style: double;
+    padding: 10px;
+   
+}
+
+#careers{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 16px;
+    line-height: 18px;
+    text-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7;
+    margin: 10px;
+}
+
+.careers-logo{
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    width: 500px;
+    height: auto;
+    box-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7;
+}

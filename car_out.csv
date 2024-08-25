@@ -1,0 +1,42 @@
+id,make,model,year,rental_price,color,image,location
+0,Toyota,Camry,2017,55,Silver,car_images/Car_0_EqHxqmJ.jpg,Outremont
+1,Toyota,Camry,2018,55,Black,car_images/Car_1_ZP8cX5e.jpg,Hochelaga
+2,Toyota,RAV4,2019,65,White,car_images/Car_2_TisTIyg.jpg,Hochelaga
+3,Toyota,Corolla,2015,50,Silver,car_images/Car_3_yhEd2gO.jpg,Verdun
+4,Toyota,Corolla,2016,50,Red,car_images/Car_4_iRvLONR.jpg,Outremont
+5,Toyota,Prius,2020,70,Blue,car_images/Car_5_NpuCqdF.jpg,Downtown
+6,Mazda,Mazda3,2020,75,Red,car_images/Car_6_DQXGrnp.jpg,Downtown
+7,Mazda,Mazda3,2021,80,Red,car_images/Car_7_rChC4CI.jpg,Downtown
+8,Mazda,CX-5,2021,90,Red,car_images/Car_8_GQrauNH.jpg,Downtown
+9,Mazda,CX-5,2021,90,Black,car_images/Car_9_eA14ugy.jpg,Downtown
+10,Mazda,CX-5,2022,95,Grey,car_images/Car_10_DpIJf6h.jpg,Downtown
+11,Honda,Accord,2023,100,Blue,car_images/Car_11_fmPoAJw.jpg,Downtown
+12,Honda,Accord,2023,100,Blue,car_images/Car_12_mX8kkRH.jpg,Downtown
+13,Honda,Civic,2023,99,White,car_images/Car_13_9nviv4U.jpg,Downtown
+14,Honda,Civic,2023,99,Black,car_images/Car_14_uqZfz6M.jpg,Downtown
+15,GMC,Yukon,2020,150,Black,car_images/Car_15_WXbuSKI.jpg,Hochelaga
+16,GMC,Yukon,2019,145,Black,car_images/Car_16_ZlrzLdR.jpg,Hochelaga
+17,GMC,Yukon,2018,145,Black,car_images/Car_17_c5oPHMp.jpg,Hochelaga
+18,GMC,Terrain,2020,120,Grey,car_images/Car_18_9v1HAp4.jpg,Hochelaga
+19,GMC,Terrain,2015,110,Grey,car_images/Car_19_O4RPlET.jpg,Verdun
+20,Ford,Focus,2018,60,White,car_images/Car_20_XSnkrk5.jpg,Hochelaga
+21,Ford,Focus,2017,60,Red,car_images/Car_21_fedXHAU.jpg,Outremont
+22,Ford,Fusion,2016,50,Red,car_images/Car_22_lReMhDQ.jpg,Outremont
+23,Ford,Fusion,2016,50,White,car_images/Car_23_1sswDS4.jpg,Outremont
+24,Ford,F-150,2014,118,Blue,car_images/Car_24_iimZeSQ.jpg,Verdun
+25,Ford,F-150,2014,118,Red,car_images/Car_25_axoIEQV.jpg,Verdun
+26,Ford,F-150,2015,118,Grey,car_images/Car_26_xWjQrrD.jpg,Verdun
+27,Ford,F-150,2016,120,Red,car_images/Car_27_bS0Xpci.jpg,Outremont
+28,Hyundai,Elantra,2017,60,Red,car_images/Car_28_lt9QOye.jpg,Outremont
+29,Hyundai,Elantra,2018,60,Blue,car_images/Car_29_uAcFE5x.jpg,Hochelaga
+30,Hyundai,Santa Fe,2013,45,Brown,car_images/Car_30_trCM4Qf.jpg,Verdun
+31,Hyundai,Santa Fe,2014,45,Red,car_images/Car_31_PfyKR1f.jpg,Verdun
+32,Volkswagen,Golf,2015,73,Blue,car_images/Car_32_q3ws62W.jpg,Verdun
+33,Volkswagen,Golf,2016,73,Grey,car_images/Car_33_lW2Smx8.jpg,Verdun
+34,Volkswagen,Golf,2017,80,Black,car_images/Car_34_u6EDRd9.jpg,Outremont
+35,Volkswagen,Jetta,2018,80,Black,car_images/Car_35_hRJ1HFl.jpg,Outremont
+36,Volkswagen,Jetta,2015,71,White,car_images/Car_36_yhBMzxU.jpg,Verdun
+37,Jeep,Grand Cherokee,2019,97,Black,car_images/Car_37_gXNyKmL.jpg,Hochelaga
+38,Jeep,Grand Cherokee,2018,97,Grey,car_images/Car_38_cjYp3ho.jpg,Outremont
+39,Jeep,Compass,2017,95,Grey,car_images/Car_39_plcf904.jpg,Outremont
+40,Jeep,Compass,2020,99,Grey,car_images/Car_40_OHt6luI.jpg,Hochelaga

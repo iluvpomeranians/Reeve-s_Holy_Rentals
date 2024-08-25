@@ -1,0 +1,67 @@
+{% load static %}
+<script src="https://unpkg.com/htmx.org"></script>
+<script src="{% static 'scripts/renderReservation.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'css/styletable.css' %}">
+
+<div id="search-results" class="fade-me-in" hx-trigger="load transitionend:htmx" hx-target="#search-results">
+    {% if cars %}
+        <table class="resultstable">
+            <thead>
+                <tr>
+                    <th class="th_inner">Reserve</th>
+                    <th class="th_inner">Make</th>
+                    <th class="th_inner">Model</th>
+                    <th class="th_inner">Year</th>
+                    <th class="th_inner">Color</th>
+                    <th class="th_inner">Rental Price/day</th>
+                    <th class="th_inner">Compare</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars %}
+                    <tr>
+                        <td>
+                            <button id="reserve-button{{car.make}}{{car.year}}{{car.color}}{{car.model}}"
+                                    class="reserve-button"
+                                    hx-post="{% url 'render_reservation_page' %}?make={{ car.make|urlencode }}&model={{ car.model|urlencode }}&year={{ car.year }}&color={{ car.color|urlencode }}&price={{ car.rental_price|urlencode }}&image={{ MEDIA_URL }}{{ car.image|urlencode }}"
+                                    hx-target="body"
+                                    hx-swap="beforeend"
+                                    hx-trigger="click">
+                                    Reserve
+                            </button>
+                        </td>
+                        <td class="td_results">{{ car.make }}</td>
+                        <td class="td_results">{{ car.model }}</td>
+                        <td class="td_results">{{ car.year }}</td>
+                        <td class="td_results">{{ car.color }}</td>
+                        <td class="td_results">{{ car.rental_price }}</td>
+                        <td>
+                            <button id="compare-button{{car.make}}{{car.year}}{{car.color}}{{car.model}}"
+                                    class="compare-button"
+                                    _="on click add .htmx-request
+                                    then wait for 1s
+                                    then remove .htmx-request
+                                    then add .quick-htmx-indicator"
+                                    hx-post="{% url 'compare' %}?make={{ car.make|urlencode }}&model={{ car.model|urlencode }}&year={{ car.year }}&color={{ car.color|urlencode }}&price={{ car.rental_price|urlencode }}&image={{ MEDIA_URL }}{{ car.image|urlencode }}"
+                                    hx-target="body"
+                                    hx-swap="beforeend"
+                                    hx-trigger="click"
+                                    hx-indicator="#quick-compare-indicator{{car.make}}{{car.year}}{{car.color}}{{car.model}}">
+                                    Compare
+                                    <BR>
+                                    <img id="quick-compare-indicator{{car.make}}{{car.year}}{{car.color}}{{car.model}}"
+                                         class="quick-htmx-indicator"
+                                         src="{% static 'images/bars.svg' %}">
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+
+    {% endif %}
+</div>
+
+
+

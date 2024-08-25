@@ -1,0 +1,209 @@
+/* * {
+    box-sizing: border-box;
+} */
+
+.headnav {
+    width: calc(90% + 17px);
+}
+
+#browse-page
+{
+    padding-top: 8vh;
+}
+
+.browse-page h1 {
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.browse-page .title {
+    font-size: 1.5rem;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.browse-page .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.browse-page #search-form {
+    background-color: var(--white);
+    padding: 25px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    max-width: 50%;
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line */
+    justify-content: space-between; /* Spaces out the children evenly */
+    align-items: center; /* Vertically centers items in the line */
+    gap: 10px; /* Optional: Adds space between items */
+
+}
+
+.browse-page #car-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.browse-page .car-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 5px #81D8F7, 0 0 10px #81D8F7, 0 0 10px #81D8F7, 0 0 20px #81D8F7; */
+    overflow: hidden;
+    width: calc(25% - 20px); /* Four items per row */
+    margin-bottom: 20px;
+    transition: transform 0.25s ease;
+    display: flex;
+    flex-direction: column;
+}
+.browse-page .car-card:hover{
+    transform: scale(1.07);
+}
+
+.browse-page .car-image {
+    width: 100%;
+    object-fit: contain;
+    display: block;
+    height: auto;
+
+}
+
+.browse-page .car-info {
+    padding: 15px;
+    margin-top: auto;
+}
+
+.browse-page .car-title {
+    margin: 0;
+    color: #333;
+}
+
+.browse-page .car-location,
+.browse-page .car-year,
+.browse-page .car-price,
+.browse-page .car-color {
+    margin: 5px 0;
+    color: #666;
+}
+
+.browse-page .back-link {
+    display: block;
+    width: max-content;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.buttons-car-card{
+    margin-top: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.browse-page .reserve-button {
+    font-size: 18px;
+    /* display: block; */
+    width: auto;
+    padding: 10px 15px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #5cb85c;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.5s,color 0.5s;
+}
+.browse-page .reserve-button:hover {
+    background-color: rgb(230, 230, 230);
+    color: #5cb85c;
+}
+#browse-compare-button {
+    /* display: block; */
+    width: auto;
+    /* margin: 15px; */
+    padding: 10px 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #b6c0ee;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+}
+.browse-page #browse-compare-button:hover {
+    background-color: white;
+    color: #b6c0ee;
+}
+
+.browse-page .search-btn {
+    padding: 12px 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--accent2);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.browse-page .inputsearch {
+  flex: 1 1 auto; /* Allows input fields to grow and shrink as needed */
+      padding: 12px 15px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  color: #333;
+}
+
+.browse-page .search-btn:hover {
+    background-color: var(--accent2_hover);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .car-card {
+        width: calc(50% - 20px); /* Two items per row */
+    }
+}
+
+@media (max-width: 600px) {
+    .car-card {
+        width: 100%; /* One item per row */
+    }
+}
+
+.htmx-indicator{
+    opacity:0;
+    transition: opacity 500ms ease-in;
+    display: none;
+}
+#browse-compare-button.htmx-request .htmx-indicator {
+    display: inline-block;
+    opacity: 1;
+}

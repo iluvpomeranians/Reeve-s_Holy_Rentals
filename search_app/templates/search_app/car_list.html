@@ -1,0 +1,81 @@
+{% load static %}
+{% for car in cars %}
+    <div class="car-card" >
+        <img src="{{ MEDIA_URL }}{{ car.image }}" alt="{{ car.make }} {{ car.model }}" class="car-image">
+        <div class="car-info">
+            <h2 class="car-title">{{ car.make }} {{ car.model }}</h2>
+            <p class="car-year">Year: {{ car.year }}</p>
+            <p class="car-price">Rental Price: ${{ car.rental_price }}</p>
+            <p class="car-color">Color: {{ car.color }}</p>
+            <p class="car-location">Location: {{ car.location }}</p>
+        </div>
+        <button id="browse-compare-button"
+                hx-post="{% url 'compare' %}?make={{ car.make|urlencode }}&model={{ car.model|urlencode }}&year={{ car.year }}&color={{ car.color|urlencode }}&price={{ car.rental_price|urlencode }}&image={{ MEDIA_URL }}{{ car.image|urlencode }}" 
+                hx-target="body" 
+                hx-swap="beforeend"
+                hx-trigger="click"
+                hx-indicator="#browse-compare-button"> 
+                Compare
+                <img class="htmx-indicator" src="{% static 'images/bars.svg' %}"> 
+        </button>
+        <button hx-post="{% url 'render_reservation_page' %}?make={{ car.make|urlencode }}&model={{ car.model|urlencode }}&year={{ car.year }}&color={{ car.color|urlencode }}&price={{ car.rental_price|urlencode }}&image={{ MEDIA_URL }}{{ car.image|urlencode }}" 
+                        hx-target="body" 
+                        hx-swap="beforeend"
+                        hx-trigger="click"                        
+                        class="reserve-button">
+                        Reserve
+        </button>
+     </div>
+{% empty %}
+<div>
+    <pre>
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀
+⠀⠀⠀⣰⣿⣿⣿⣿⣿⠿⠿⣿⣿⣿⣿⣿⣿⣧⢀⠀⠀⠀⠀
+⠀⠀⣿⣿⣿⠋⠀⠀⠀⠀⠀⠙⠀⠙⣿⣿⣿⣷⢳⢀⠀⠀⠀
+⠀⣠⣿⣿⣿⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⢀
+⠀⣸⣿⣿⣿⠸⠀⠀⠀⠒⠒⠒⠐⠀⠀⢿⣿⣿⣿⣿⣿⠀⠀
+⣴⣿⣿⣿⣿⡿⠀⠒⣋⣙⡒⢰⠀⠤⣖⠒⢾⣿⣿⣿⣧⠀⠀
+⢺⣿⣿⣿⣿⢀⠀⠀⠉⠉⠉⠸⠀⡇⠉⠉⠀⢿⣿⣿⣿⣄⠀⠀
+⠀⠙⣿⣿⣧⢻⠀⠀⠀⠀⠀⠠⠀⠰⠀⠀⠀⣸⠸⣿⣿⠿⠰⠀
+⠀⠀⠀⠹⣿⣿⣿⣷⠀⡠⠙⣲⣔⣅⢡⣰⣷⣿⣿⣿⣧⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣿⣿⠀⡿⠭⠭⠭⠭⢿⠀⣿⢻⣿⣿⠃⠀⠀⠀
+⠀⠀⠀⠙⠛⣿⢻⠹⣿⠐⠙⠛⠟⠉⢀⣴⡟⢿⣿⡏⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠻⣦⣤⣶⠾⠋⠀⠀⠁⡦⢄⢀⠀⠀⠀
+⠀⠀⠀⡠⠁⡇⠑⢄⠀⠀⠀⠀⠀⠀⠔⠀⠀⠁⠀⠀⠀⠉⠁
+⠀⠔⠊⠁⠀⠀⣇⠀⠀⠀⠑⡤⠤⢎⠁⠀⠀⡘⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢢⠠⠀⡠⢆⠀⠀⡠⠙⢄⠀⡸⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⡠⠁⡇⠑⢄⠀⠀⠀⠀⠀⠀⠔⠀⠀⠁⠀⠀⠀⠉⠁
+
+<a href="https://www.youtube.com/watch?v=bPYImG5BJWA">I'm sorry...</a>
+    </pre>        
+</div>
+    <div>
+        <center><h2>Sorry, No Results. Try different Search Criteria!</h2></center>
+    </div>
+    <BR>
+    <div>
+        <pre>
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀
+⠀⠀⠀⣰⣿⣿⣿⣿⣿⠿⠿⣿⣿⣿⣿⣿⣿⣧⢀⠀⠀⠀⠀
+⠀⠀⣿⣿⣿⠋⠀⠀⠀⠀⠀⠙⠀⠙⣿⣿⣿⣷⢳⢀⠀⠀⠀
+⠀⣠⣿⣿⣿⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⢀
+⠀⣸⣿⣿⣿⠸⠀⠀⠀⠒⠒⠒⠐⠀⠀⢿⣿⣿⣿⣿⣿⠀⠀
+⣴⣿⣿⣿⣿⡿⠀⠒⣋⣙⡒⢰⠀⠤⣖⠒⢾⣿⣿⣿⣧⠀⠀
+⢺⣿⣿⣿⣿⢀⠀⠀⠉⠉⠉⠸⠀⡇⠉⠉⠀⢿⣿⣿⣿⣄⠀⠀
+⠀⠙⣿⣿⣧⢻⠀⠀⠀⠀⠀⠠⠀⠰⠀⠀⠀⣸⠸⣿⣿⠿⠰⠀
+⠀⠀⠀⠹⣿⣿⣿⣷⠀⡠⠙⣲⣔⣅⢡⣰⣷⣿⣿⣿⣧⠀⠀⠀
+⠀⠀⠀⣼⣿⣿⣿⣿⠀⡿⠭⠭⠭⠭⢿⠀⣿⢻⣿⣿⠃⠀⠀⠀
+⠀⠀⠀⠙⠛⣿⢻⠹⣿⠐⠙⠛⠟⠉⢀⣴⡟⢿⣿⡏⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⡟⠀⠀⠻⣦⣤⣶⠾⠋⠀⠀⠁⡦⢄⢀⠀⠀⠀
+⠀⠀⠀⡠⠁⡇⠑⢄⠀⠀⠀⠀⠀⠀⠔⠀⠀⠁⠀⠀⠀⠉⠁
+⠀⠔⠊⠁⠀⠀⣇⠀⠀⠀⠑⡤⠤⢎⠁⠀⠀⡘⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢢⠠⠀⡠⢆⠀⠀⡠⠙⢄⠀⡸⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⡠⠁⡇⠑⢄⠀⠀⠀⠀⠀⠀⠔⠀⠀⠁⠀⠀⠀⠉⠁
+    
+  <a href="https://www.youtube.com/watch?v=bPYImG5BJWA">So sorry...</a>
+        </pre>        
+    </div>
+</div>
+{% endfor %}
